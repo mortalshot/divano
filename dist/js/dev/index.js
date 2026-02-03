@@ -5309,84 +5309,114 @@ function initSliders() {
   }
 }
 document.querySelector("[data-fls-slider]") ? window.addEventListener("load", initSliders) : null;
+(function initMobileMenuTopOffset() {
+  const menuBody = document.querySelector(".menu__body");
+  const menuRoot = document.querySelector("[data-fls-menu]");
+  if (!menuBody || !menuRoot) return;
+  const mq = window.matchMedia("(max-width: 991.98px)");
+  const headerSelectors = [".header-top", ".header-main", ".header-bottom"];
+  const getHeadersBottom = () => {
+    let bottom = 0;
+    headerSelectors.forEach((sel) => {
+      const el = document.querySelector(sel);
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      bottom = Math.max(bottom, rect.bottom);
+    });
+    return Math.max(0, Math.round(bottom));
+  };
+  const setTop = () => {
+    const top = getHeadersBottom();
+    menuBody.style.setProperty("--menu-top", `${top}px`);
+  };
+  const setTopNextFrame = () => {
+    requestAnimationFrame(() => {
+      setTop();
+      requestAnimationFrame(setTop);
+    });
+  };
+  const enable = () => {
+    setTopNextFrame();
+    window.addEventListener("resize", setTopNextFrame);
+    window.addEventListener("scroll", setTopNextFrame, { passive: true });
+    window.addEventListener("load", setTopNextFrame);
+    document.addEventListener("click", onMenuToggleClick, true);
+  };
+  const disable = () => {
+    window.removeEventListener("resize", setTopNextFrame);
+    window.removeEventListener("scroll", setTopNextFrame);
+    window.removeEventListener("load", setTopNextFrame);
+    document.removeEventListener("click", onMenuToggleClick, true);
+    menuBody.style.removeProperty("--menu-top");
+  };
+  function onMenuToggleClick(e) {
+    if (!mq.matches) return;
+    const toggle = e.target.closest(".icon-menu");
+    if (!toggle) return;
+    setTopNextFrame();
+  }
+  const apply = () => mq.matches ? enable() : disable();
+  apply();
+  if (mq.addEventListener) mq.addEventListener("change", apply);
+  else mq.addListener(apply);
+})();
 function menuInit() {
   document.addEventListener("click", function(e) {
-    if (bodyLockStatus && e.target.closest("[data-fls-menu]")) {
-      bodyLockToggle();
-      document.documentElement.toggleAttribute("data-fls-menu-open");
-    }
+    if (!bodyLockStatus) return;
+    const burger = e.target.closest(".icon-menu");
+    if (!burger) return;
+    bodyLockToggle();
+    document.documentElement.toggleAttribute("data-fls-menu-open");
   });
 }
 document.querySelector("[data-fls-menu]") ? window.addEventListener("load", menuInit) : null;
-let inited = false;
-let lastH = -1;
-let controller = null;
-let ro = null;
-function initHeaderHeight() {
-  if (inited) return;
-  inited = true;
-  const root = document.documentElement;
-  const header = document.querySelector(".header");
-  if (!header) return;
-  const setVar = () => {
-    const h = header.getBoundingClientRect().height || 0;
-    if (h !== lastH) {
-      lastH = h;
-      root.style.setProperty("--header-height", `${h}px`);
-    }
-  };
-  setVar();
-  controller = new AbortController();
-  const { signal } = controller;
-  ro = new ResizeObserver(setVar);
-  ro.observe(header);
-  const onResize2 = () => requestAnimationFrame(setVar);
-  window.addEventListener("resize", onResize2, { passive: true, signal });
+function isMenuOpen$1() {
+  return document.documentElement.hasAttribute("data-fls-menu-open");
 }
-initHeaderHeight();
 const catalogButtons = document.querySelectorAll(".header-catalog__toggle");
-if (catalogButtons.length > 0) {
+if (catalogButtons.length) {
   catalogButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       if (!bodyLockStatus) return;
-      const parent = btn.closest(".header-catalog");
-      if (!parent) return;
-      const isOpening = !parent.classList.contains("_catalog-active");
-      parent.classList.toggle("_catalog-active");
-      if (isOpening) {
-        const activeSearch = document.querySelector(".search._search-active");
-        if (activeSearch) activeSearch.classList.remove("_search-active");
-        if (!isMenuOpen()) {
-          bodyLock();
-        }
+      const catalog = btn.closest(".header-catalog");
+      if (!catalog) return;
+      const willOpen = !catalog.classList.contains("_catalog-active");
+      catalog.classList.toggle("_catalog-active");
+      if (willOpen) {
         bodyLock();
       } else {
-        const stillOpenSearch = document.querySelector(".search._search-active");
-        if (!isMenuOpen() && !stillOpenSearch) {
-          bodyUnlock();
-        }
+        if (!isMenuOpen$1()) bodyUnlock();
       }
     });
   });
 }
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" || e.key === "Esc") {
-    const activeCatalog = document.querySelector(".header-catalog._catalog-active");
-    if (activeCatalog) {
-      bodyLockToggle();
-      activeCatalog.classList.remove("_catalog-active");
-    }
-  }
+  if (e.key !== "Escape" && e.key !== "Esc") return;
+  const activeCatalog = document.querySelector(".header-catalog._catalog-active");
+  if (!activeCatalog) return;
+  activeCatalog.classList.remove("_catalog-active");
+  if (!isMenuOpen$1()) bodyUnlock();
 });
-const DESKTOP_MIN = 768;
+const DESKTOP_MIN = 991.98;
 const mql = window.matchMedia(`(min-width: ${DESKTOP_MIN}px)`);
 document.querySelectorAll(".header-catalog__tabs").forEach(initTabsBlock);
 function initTabsBlock(block) {
   const btns = Array.from(block.querySelectorAll("button.header-catalog__title"));
   const bodies = Array.from(block.querySelectorAll(".header-catalog__body"));
+  const subBodies = Array.from(block.querySelectorAll(".header-catalog__subbody"));
+  function clearSubAll() {
+    subBodies.forEach((sb) => sb.classList.remove("_sub-active"));
+  }
+  function openSubByKey(key) {
+    if (!key) return;
+    clearSubAll();
+    const target = subBodies.find((sb) => sb.dataset.subbody === key);
+    if (target) target.classList.add("_sub-active");
+  }
   block.addEventListener("click", (e) => {
     const btn = e.target.closest("button.header-catalog__title");
     if (!btn || !block.contains(btn)) return;
+    e.preventDefault();
     const idx = btns.indexOf(btn);
     if (idx === -1) return;
     btns.forEach((b) => b.classList.remove("_item-active"));
@@ -5405,10 +5435,32 @@ function initTabsBlock(block) {
     const item = link.closest(".header-catalog__item") || link;
     item.classList.add("_item-hover");
   });
+  block.addEventListener("pointerover", (e) => {
+    if (!mql.matches) return;
+    const trigger = e.target.closest("[data-subtarget]");
+    if (!trigger || !block.contains(trigger)) return;
+    const key = trigger.dataset.subtarget;
+    openSubByKey(key);
+  });
+  block.addEventListener("click", (e) => {
+    if (mql.matches) return;
+    const trigger = e.target.closest("[data-subtarget]");
+    if (!trigger || !block.contains(trigger)) return;
+    e.preventDefault();
+    const key = trigger.dataset.subtarget;
+    openSubByKey(key);
+  });
   block.addEventListener("click", (e) => {
     const close = e.target.closest(".header-catalog__close");
     if (!close || !block.contains(close)) return;
     if (mql.matches) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const subBody = close.closest(".header-catalog__subbody");
+    if (subBody) {
+      clearSubAll();
+      return;
+    }
     const body = close.closest(".header-catalog__body");
     if (!body) return;
     body.classList.remove("_item-active");
@@ -5416,11 +5468,13 @@ function initTabsBlock(block) {
     if (idx > -1 && btns[idx]) {
       btns[idx].classList.remove("_item-active");
     }
+    clearSubAll();
   });
   function clearAll() {
     btns.forEach((b) => b.classList.remove("_item-active"));
     bodies.forEach((b) => b.classList.remove("_item-active"));
     block.querySelectorAll("._item-hover").forEach((el) => el.classList.remove("_item-hover"));
+    clearSubAll();
   }
   function setDesktopDefaults() {
     clearAll();
@@ -5430,6 +5484,12 @@ function initTabsBlock(block) {
       const firstItem = body.querySelector(".header-catalog__item");
       if (firstItem) firstItem.classList.add("_item-hover");
     });
+    const activeBody = bodies.find((b) => b.classList.contains("_item-active")) || bodies[0];
+    if (activeBody) {
+      const firstSubTrigger = activeBody.querySelector("[data-subtarget]");
+      if (firstSubTrigger) openSubByKey(firstSubTrigger.dataset.subtarget);
+      else clearSubAll();
+    }
   }
   mql.matches ? setDesktopDefaults() : clearAll();
   const onChange = (e) => e.matches ? setDesktopDefaults() : clearAll();
@@ -7795,8 +7855,33 @@ class DynamicAdapt {
 if (document.querySelector("[data-fls-dynamic]")) {
   window.addEventListener("load", () => new DynamicAdapt());
 }
+let inited = false;
+let lastH = -1;
+let controller = null;
+let ro = null;
+function initHeaderHeight() {
+  if (inited) return;
+  inited = true;
+  const root = document.documentElement;
+  const header = document.querySelector(".header");
+  if (!header) return;
+  const setVar = () => {
+    const h = header.getBoundingClientRect().height || 0;
+    if (h !== lastH) {
+      lastH = h;
+      root.style.setProperty("--header-height", `${h}px`);
+    }
+  };
+  setVar();
+  controller = new AbortController();
+  const { signal } = controller;
+  ro = new ResizeObserver(setVar);
+  ro.observe(header);
+  const onResize2 = () => requestAnimationFrame(setVar);
+  window.addEventListener("resize", onResize2, { passive: true, signal });
+}
 initHeaderHeight();
-const isMenuOpen$1 = () => document.documentElement.hasAttribute("data-fls-menu-open");
+const isMenuOpen = () => document.documentElement.hasAttribute("data-fls-menu-open");
 const searchButtons = document.querySelectorAll(".search__toggle");
 if (searchButtons.length > 0) {
   searchButtons.forEach((btn) => {
@@ -7812,11 +7897,11 @@ if (searchButtons.length > 0) {
           activeCatalog.classList.remove("_catalog-active");
           return;
         }
-        if (isMenuOpen$1()) return;
+        if (isMenuOpen()) return;
         bodyLock();
       } else {
         const stillOpenCatalog = document.querySelector(".header-catalog._catalog-active");
-        if (!stillOpenCatalog && !isMenuOpen$1()) {
+        if (!stillOpenCatalog && !isMenuOpen()) {
           bodyUnlock();
         }
       }
