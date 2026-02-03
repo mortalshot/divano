@@ -5195,6 +5195,74 @@ function initSliders() {
       on: {}
     });
   }
+  if (document.querySelector(".widget-ideas__slider")) {
+    new Swiper(".widget-ideas__slider", {
+      modules: [Navigation],
+      observer: true,
+      observeParents: true,
+      slidesPerView: 1.15,
+      spaceBetween: 10,
+      autoHeight: false,
+      speed: 800,
+      navigation: {
+        prevEl: ".widget-ideas__slider-wrapper .swiper-button--prev",
+        nextEl: ".widget-ideas__slider-wrapper .swiper-button--next"
+      },
+      breakpoints: {
+        480: {
+          slidesPerView: 1.6,
+          spaceBetween: 20
+        },
+        575: {
+          slidesPerView: 2,
+          spaceBetween: 20
+        },
+        768: {
+          slidesPerView: 2.5,
+          spaceBetween: 20
+        },
+        992: {
+          slidesPerView: 3,
+          spaceBetween: 20
+        }
+      },
+      on: {}
+    });
+  }
+  if (document.querySelector(".widget-news__slider")) {
+    new Swiper(".widget-news__slider", {
+      modules: [Navigation],
+      observer: true,
+      observeParents: true,
+      slidesPerView: 1.15,
+      spaceBetween: 10,
+      autoHeight: false,
+      speed: 800,
+      navigation: {
+        prevEl: ".widget-news__slider-wrapper .swiper-button--prev",
+        nextEl: ".widget-news__slider-wrapper .swiper-button--next"
+      },
+      breakpoints: {
+        480: {
+          slidesPerView: 1.6,
+          spaceBetween: 20
+        },
+        575: {
+          slidesPerView: 2,
+          spaceBetween: 20
+        },
+        768: {
+          slidesPerView: 2.5,
+          spaceBetween: 20
+        },
+        992: {
+          slidesPerView: 3,
+          spaceBetween: 20
+        }
+      },
+      on: {}
+    });
+  }
   if (document.querySelector(".widget-gallery__slider")) {
     const gallerySlider = document.querySelector(".widget-gallery__slider");
     let swiperInstance = null;
@@ -7764,6 +7832,50 @@ document.addEventListener("keydown", (e) => {
     }
   }
 });
+(function initIdeaHotspots() {
+  const root = document.querySelector("[data-fls-cardidea]")?.closest(".ideas") || document;
+  if (!root) return;
+  const cards = root.querySelectorAll(".idea-card");
+  if (!cards.length) return;
+  const closeAllInCard = (card) => {
+    card.querySelectorAll(".hotspot.is-open").forEach((btn) => {
+      btn.classList.remove("is-open");
+      btn.setAttribute("aria-expanded", "false");
+    });
+  };
+  const closeAll = () => {
+    root.querySelectorAll(".hotspot.is-open").forEach((btn) => {
+      btn.classList.remove("is-open");
+      btn.setAttribute("aria-expanded", "false");
+    });
+  };
+  cards.forEach((card) => {
+    card.addEventListener("click", (e) => {
+      const btn = e.target.closest(".hotspot");
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      const isOpen = btn.classList.contains("is-open");
+      closeAllInCard(card);
+      if (!isOpen) {
+        btn.classList.add("is-open");
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("[data-fls-ideas] .idea-card")) {
+      closeAll();
+      return;
+    }
+    if (!e.target.closest(".hotspot") && e.target.closest("[data-fls-ideas]")) {
+      closeAll();
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeAll();
+  });
+})();
 function initHeaderBottomHoverPill() {
   const catalog = document.querySelector(".header-bottom__catalog");
   if (!catalog) return;
