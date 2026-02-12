@@ -5071,35 +5071,13 @@ function initSliders() {
       on: {}
     });
   }
-  if (document.querySelector(".product-card__preview")) {
-    new Swiper(".product-card__preview", {
-      modules: [Pagination],
-      observer: true,
-      observeParents: true,
-      slidesPerView: 1,
-      spaceBetween: 18,
-      autoHeight: false,
-      speed: 800,
-      pagination: {
-        el: ".product-card__preview .swiper-pagination",
-        clickable: true
-      },
-      /* breakpoints: {
-      	768: {
-      		slidesPerView: 1.5,
-      		spaceBetween: 18,
-      	},
-      }, */
-      on: {}
-    });
-  }
   if (document.querySelector(".widget-products__slider")) {
     new Swiper(".widget-products__slider", {
       modules: [Navigation],
       observer: true,
       observeParents: true,
-      slidesPerView: 1.3,
-      spaceBetween: 10,
+      slidesPerView: 1.7,
+      spaceBetween: 12,
       autoHeight: false,
       speed: 800,
       navigation: {
@@ -5128,6 +5106,28 @@ function initSliders() {
           spaceBetween: 20
         }
       },
+      on: {}
+    });
+  }
+  if (document.querySelector(".product-card__preview")) {
+    new Swiper(".product-card__preview", {
+      modules: [Pagination],
+      observer: true,
+      observeParents: true,
+      slidesPerView: 1,
+      spaceBetween: 18,
+      autoHeight: false,
+      speed: 800,
+      pagination: {
+        el: ".product-card__preview .swiper-pagination",
+        clickable: true
+      },
+      /* breakpoints: {
+      	768: {
+      		slidesPerView: 1.5,
+      		spaceBetween: 18,
+      	},
+      }, */
       on: {}
     });
   }
@@ -5421,6 +5421,8 @@ function initTabsBlock(block) {
     if (idx === -1) return;
     btns.forEach((b) => b.classList.remove("_item-active"));
     bodies.forEach((b) => b.classList.remove("_item-active"));
+    clearSubAll();
+    block.querySelectorAll("._item-hover").forEach((el) => el.classList.remove("_item-hover"));
     btn.classList.add("_item-active");
     if (bodies[idx]) {
       bodies[idx].classList.add("_item-active");
@@ -5476,26 +5478,46 @@ function initTabsBlock(block) {
     block.querySelectorAll("._item-hover").forEach((el) => el.classList.remove("_item-hover"));
     clearSubAll();
   }
-  function setDesktopDefaults() {
-    clearAll();
-    if (btns[0]) btns[0].classList.add("_item-active");
-    if (bodies[0]) bodies[0].classList.add("_item-active");
-    bodies.forEach((body) => {
-      const firstItem = body.querySelector(".header-catalog__item");
-      if (firstItem) firstItem.classList.add("_item-hover");
-    });
-    const activeBody = bodies.find((b) => b.classList.contains("_item-active")) || bodies[0];
-    if (activeBody) {
-      const firstSubTrigger = activeBody.querySelector("[data-subtarget]");
-      if (firstSubTrigger) openSubByKey(firstSubTrigger.dataset.subtarget);
-      else clearSubAll();
-    }
-  }
-  mql.matches ? setDesktopDefaults() : clearAll();
-  const onChange = (e) => e.matches ? setDesktopDefaults() : clearAll();
+  mql.matches ? "" : clearAll();
+  const onChange = (e) => e.matches ? "" : clearAll();
   if (mql.addEventListener) mql.addEventListener("change", onChange);
   else mql.addListener(onChange);
 }
+(function initCatalogTopOffset() {
+  const catalogWrapper = document.querySelector(".header-catalog__wrapper");
+  if (!catalogWrapper) return;
+  const headerSelectors = [".header-top", ".header-main", ".header-bottom"];
+  const getHeaderBottom = () => {
+    let bottom = 0;
+    headerSelectors.forEach((sel) => {
+      const el = document.querySelector(sel);
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      bottom = Math.max(bottom, rect.bottom);
+    });
+    return Math.max(0, Math.round(bottom));
+  };
+  let lastTop = null;
+  let rafId = 0;
+  const applyTop = () => {
+    rafId = 0;
+    const top = getHeaderBottom();
+    if (top === lastTop) return;
+    lastTop = top;
+    catalogWrapper.style.setProperty("--catalog-top", `${top}px`);
+  };
+  const requestApply = () => {
+    if (rafId) return;
+    rafId = requestAnimationFrame(applyTop);
+  };
+  requestApply();
+  window.addEventListener("load", requestApply);
+  window.addEventListener("resize", requestApply);
+  window.addEventListener("scroll", requestApply, { passive: true });
+  document.addEventListener("click", (e) => {
+    if (e.target.closest(".header-catalog__toggle")) requestApply();
+  }, true);
+})();
 var __assign = function() {
   __assign = Object.assign || function __assign2(t) {
     for (var s, i = 1, n = arguments.length; i < n; i++) {
