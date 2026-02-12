@@ -15,8 +15,8 @@
 		<link rel="preload" href="./assets/fonts/Inter-Black.woff2" as="font" type="font/woff2" crossorigin="anonymous">
 		<link rel="shortcut icon" href="./assets/img/favicon.ico">
 		<title>Главная страница</title>
-		<script type="module" crossorigin="" src="./js/index.min.js?v=1770894356071"></script>
-		<link rel="stylesheet" crossorigin="" href="./css/index.min.css?v=1770894356071">
+		<script type="module" crossorigin="" src="./js/index.min.js?v=1770906235904"></script>
+		<link rel="stylesheet" crossorigin="" href="./css/index.min.css?v=1770906235904">
 	</head>
 	<body>
 		<div class="wrapper">
@@ -104,7 +104,7 @@
 							</div>
 						</div>
 					</div>
-					<nav class="header-top__nav" aria-label="Верхнее меню" data-fls-dynamic=".menu__top-nav, 991.98">
+					<nav class="header-top__nav" aria-label="Верхнее меню">
 						<ul class="top-nav">
 							<li class="top-nav__item">
 								<a class="top-nav__link" href="#">Магазин</a>
@@ -166,7 +166,7 @@
 -->
 						</div>
 					</div>
-					<div class="header-main__contacts" data-fls-dynamic=".menu__contacts, 991.98">
+					<div class="header-main__contacts">
 						<div class="header-contacts">
 							<div class="header-contacts__item">
 								<a class="header-contacts__link" href="tel:+78001002436">+7 (800) 100-24-36</a>
@@ -220,16 +220,13 @@
 					<div class="header-bottom__menu menu" data-fls-menu="">
 						<button type="button" class="menu__icon icon-menu"></button>
 						<div class="menu__body">
-							<div class="menu__top-nav"></div>
-							<div class="menu__bottom-nav"></div>
 							<div class="menu__catalog"></div>
-							<div class="menu__contacts"></div>
 						</div>
 					</div>
 					<div class="header-bottom__left" data-fls-dynamic=".menu__catalog, 991.98">
 						<div class="header-bottom__catalog">
 							<div class="header-catalog" data-fls-headercatalog="">
-								<button type="button" class="header-bottom__switch header-catalog__toggle header-bottom__switch--active" aria-label="Открыть каталог" aria-expanded="false">
+								<button type="button" class="header-bottom__switch header-catalog__toggle header-catalog__toggle--catalog header-bottom__switch--active" aria-label="Открыть каталог" aria-expanded="false">
 									<span class="header-catalog__burger">
 										<span></span>
 									</span>
@@ -561,17 +558,273 @@
 									</div>
 								</div>
 							</div>
-							<div class="header-bottom__scheme" aria-label="Фильтр по комнатам">
-								<a href="scheme.html" class="header-bottom__switch rooms-switch__btn">
+							<div class="header-catalog" data-fls-headercatalog="">
+								<button type="button" class="header-bottom__switch header-catalog__toggle header-catalog__toggle--scheme" aria-label="Открыть комнаты" aria-expanded="false">
 									<svg class="icon">
 										<use href="./assets/img/spritemap.svg#sprite-scheme"></use>
 									</svg>
 									<span>Комнаты</span>
-								</a>
+								</button>
+								<div class="header-catalog__wrapper" style="display: none;">
+									<div class="header-catalog__container">
+										<button type="button" class="header-catalog__toggle">
+											<span>Комнаты</span>
+										</button>
+										<div class="header-catalog__tabs">
+											<nav class="header-catalog__nav">
+												<button class="header-catalog__title" type="button">
+													<img src="./assets/img/icons/categoryicon1.svg" alt="" loading="lazy">
+													<span>Гостинная</span>
+													<svg class="icon" aria-hidden="true">
+														<use href="./assets/img/spritemap.svg#sprite-menu-arrow"></use>
+													</svg>
+												</button>
+												<a href="archive-products.html" class="header-catalog__title">
+													<span>Дача</span>
+												</a>
+												<a href="archive-products.html" class="header-catalog__title">
+													<span>Офис</span>
+												</a>
+												<a href="archive-products.html" class="header-catalog__title">
+													<span>Кафе</span>
+												</a>
+												<a href="archive-products.html" class="header-catalog__title">
+													<span>Ресторан</span>
+												</a>
+												<a href="archive-products.html" class="header-catalog__title">
+													<span>Гостиница</span>
+												</a>
+											</nav>
+											<div class="header-catalog__content">
+												<div class="header-catalog__body">
+													<button type="button" class="header-catalog__close menu__link">Гостинная</button>
+													<ul class="header-catalog__list">
+														<li class="header-catalog__item">
+															<button type="button" class="header-catalog__link" data-subtarget="corner-sofas">
+																Диваны
+																<svg class="icon" aria-hidden="true">
+																	<use href="./assets/img/spritemap.svg#sprite-menu-arrow"></use>
+																</svg>
+															</button>
+														</li>
+														<li class="header-catalog__item">
+															<button type="button" class="header-catalog__link" data-subtarget="modular-sofas">
+																<span>Шкафы</span>
+																<svg class="icon" aria-hidden="true">
+																	<use href="./assets/img/spritemap.svg#sprite-menu-arrow"></use>
+																</svg>
+															</button>
+														</li>
+														<li class="header-catalog__item">
+															<button type="button" class="header-catalog__link" data-subtarget="corner-sofas">
+																Кресла и пуфы
+																<svg class="icon" aria-hidden="true">
+																	<use href="./assets/img/spritemap.svg#sprite-menu-arrow"></use>
+																</svg>
+															</button>
+														</li>
+														<li class="header-catalog__item">
+															<button type="button" class="header-catalog__link" data-subtarget="modular-sofas">
+																<span>Стенки</span>
+																<svg class="icon" aria-hidden="true">
+																	<use href="./assets/img/spritemap.svg#sprite-menu-arrow"></use>
+																</svg>
+															</button>
+														</li>
+														<li class="header-catalog__item">
+															<button type="button" class="header-catalog__link" data-subtarget="corner-sofas">
+																Комоды
+																<svg class="icon" aria-hidden="true">
+																	<use href="./assets/img/spritemap.svg#sprite-menu-arrow"></use>
+																</svg>
+															</button>
+														</li>
+														<li class="header-catalog__item">
+															<button type="button" class="header-catalog__link" data-subtarget="modular-sofas">
+																<span>Стеллажи</span>
+																<svg class="icon" aria-hidden="true">
+																	<use href="./assets/img/spritemap.svg#sprite-menu-arrow"></use>
+																</svg>
+															</button>
+														</li>
+														<li class="header-catalog__item">
+															<button type="button" class="header-catalog__link" data-subtarget="corner-sofas">
+																Тумбы под ТВ
+																<svg class="icon" aria-hidden="true">
+																	<use href="./assets/img/spritemap.svg#sprite-menu-arrow"></use>
+																</svg>
+															</button>
+														</li>
+														<li class="header-catalog__item">
+															<button type="button" class="header-catalog__link" data-subtarget="modular-sofas">
+																<span>Шкафы-купе</span>
+																<svg class="icon" aria-hidden="true">
+																	<use href="./assets/img/spritemap.svg#sprite-menu-arrow"></use>
+																</svg>
+															</button>
+														</li>
+														<li class="header-catalog__item">
+															<button type="button" class="header-catalog__link" data-subtarget="corner-sofas">
+																Стулья
+																<svg class="icon" aria-hidden="true">
+																	<use href="./assets/img/spritemap.svg#sprite-menu-arrow"></use>
+																</svg>
+															</button>
+														</li>
+														<li class="header-catalog__item">
+															<button type="button" class="header-catalog__link" data-subtarget="modular-sofas">
+																<span>Столы</span>
+																<svg class="icon" aria-hidden="true">
+																	<use href="./assets/img/spritemap.svg#sprite-menu-arrow"></use>
+																</svg>
+															</button>
+														</li>
+														<li class="header-catalog__item">
+															<button type="button" class="header-catalog__link" data-subtarget="corner-sofas">
+																Журнальные столики
+																<svg class="icon" aria-hidden="true">
+																	<use href="./assets/img/spritemap.svg#sprite-menu-arrow"></use>
+																</svg>
+															</button>
+														</li>
+													</ul>
+												</div>
+											</div>
+											<div class="header-catalog__subcontent">
+												<div class="header-catalog__subbody" data-subbody="corner-sofas-2">
+													<button type="button" class="header-catalog__close menu__link">Угловые диваны</button>
+													<ul class="header-catalog__sublist">
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Нераскладные</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со спальным местом</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со столиком</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Мягкие</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Дизайнерские</a>
+														</li>
+													</ul>
+												</div>
+												<div class="header-catalog__subbody" data-subbody="corner-sofas">
+													<button type="button" class="header-catalog__close menu__link">Угловые диваны</button>
+													<ul class="header-catalog__sublist">
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Нераскладные</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со спальным местом</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со столиком</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Мягкие</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Дизайнерские</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Нераскладные</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со спальным местом</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со столиком</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Мягкие</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Дизайнерские</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Нераскладные</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со спальным местом</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со столиком</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Мягкие</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Дизайнерские</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Нераскладные</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со спальным местом</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со столиком</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Мягкие</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Дизайнерские</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Нераскладные</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со спальным местом</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со столиком</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Мягкие</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Дизайнерские</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Нераскладные</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со спальным местом</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Со столиком</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Мягкие</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Дизайнерские</a>
+														</li>
+													</ul>
+												</div>
+												<div class="header-catalog__subbody" data-subbody="modular-sofas">
+													<button type="button" class="header-catalog__close menu__link">Модульные диваны</button>
+													<ul class="header-catalog__sublist">
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Модульные 1</a>
+														</li>
+														<li class="header-catalog__subitem">
+															<a class="header-catalog__sublink" href="#">Модульные 2</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
-					<nav class="header-bottom__nav" aria-label="Категории" data-fls-dynamic=".menu__bottom-nav, 991.98">
+					<nav class="header-bottom__nav" aria-label="Категории">
 						<ul class="bottom-nav">
 							<li class="bottom-nav__item">
 								<a class="bottom-nav__link" href="#">Диваны</a>
@@ -602,7 +855,7 @@
 							</li>
 						</ul>
 					</nav>
-					<div class="header-bottom__sale" data-fls-dynamic=".menu__bottom-nav, 991.98, last">
+					<div class="header-bottom__sale">
 						<a class="bottom-nav__link sale-link animation" href="#" data-fls-button="" data-fls-iconanimation="">
 							<svg class="icon animation__object" aria-hidden="true">
 								<use href="./assets/img/spritemap.svg#sprite-hot"></use>
@@ -1741,7 +1994,371 @@
 										</div>
 									</div>
 								</div>
-								<div class="tabs__body">Содержимое второго таба</div>
+								<div class="tabs__body">
+									<div class="widget-products__slider-wrapper">
+										<div class="swiper-buttons">
+											<div class="swiper-nav swiper-nav--prev">
+												<svg class="icon" aria-hidden="true">
+													<use href="./assets/img/spritemap.svg#sprite-swiper-arrow"></use>
+												</svg>
+											</div>
+											<div class="swiper-nav swiper-nav--next">
+												<svg class="icon" aria-hidden="true">
+													<use href="./assets/img/spritemap.svg#sprite-swiper-arrow"></use>
+												</svg>
+											</div>
+										</div>
+										<div data-fls-slider="" class="widget-products__slider swiper">
+											<div class="widget-products__wrapper swiper-wrapper">
+												<div class="widget-products__slide swiper-slide">
+													<div class="product-card" data-fls-cardproduct="">
+														<a href="single-product.html" data-fls-slider="" class="product-card__preview swiper">
+															<div class="product-card__wrapper swiper-wrapper">
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/products/catpreview3.webp">
+																	</picture>
+																</div>
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/products/prodprev1.webp">
+																	</picture>
+																</div>
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/promo/promoslide3.webp">
+																	</picture>
+																</div>
+															</div>
+															<div class="swiper-pagination"></div>
+														</a>
+														<div class="product-card__body">
+															<div class="product-card__price">
+																<div class="price" aria-label="Цена" data-fls-price="">
+																	<div class="price__new" aria-label="Новая цена">39 990 ₽</div>
+																	<div class="price__old" aria-label="Старая цена">50 112 ₽</div>
+																</div>
+																<div class="product-card__labels">
+																	<div class="labels" data-fls-labels="">
+																		<div class="labels__item">
+																			<span class="labels__badge labels__badge--sale">-40%</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="product-card__name">
+																<a href="single-product.html">Угловой диван Атланта</a>
+															</div>
+															<div class="product-card__footer">
+																<div class="product-card__actions">
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-compare"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-eye"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-wishlist"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-cart"></use>
+																		</svg>
+																	</button>
+																</div>
+																<div class="product-card__more" data-fls-button="">
+																	<a href="single-product.html" class="btn btn--bg-red">Подробнее</a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="widget-products__slide swiper-slide">
+													<div class="product-card" data-fls-cardproduct="">
+														<a href="single-product.html" data-fls-slider="" class="product-card__preview swiper">
+															<div class="product-card__wrapper swiper-wrapper">
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/products/prodprev1.webp">
+																	</picture>
+																</div>
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/promo/promoslide3.webp">
+																	</picture>
+																</div>
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/products/catpreview3.webp">
+																	</picture>
+																</div>
+															</div>
+															<div class="swiper-pagination"></div>
+														</a>
+														<div class="product-card__body">
+															<div class="product-card__price">
+																<div class="price" aria-label="Цена" data-fls-price="">
+																	<div class="price__new" aria-label="Новая цена">39 990 ₽</div>
+																	<div class="price__old" aria-label="Старая цена">50 112 ₽</div>
+																</div>
+																<div class="product-card__labels">
+																	<div class="labels" data-fls-labels="">
+																		<div class="labels__item">
+																			<span class="labels__badge labels__badge--sale">-40%</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="product-card__name">
+																<a href="single-product.html">Угловой диван Атланта</a>
+															</div>
+															<div class="product-card__footer">
+																<div class="product-card__actions">
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-compare"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-eye"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-wishlist"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-cart"></use>
+																		</svg>
+																	</button>
+																</div>
+																<div class="product-card__more" data-fls-button="">
+																	<a href="single-product.html" class="btn btn--bg-red">Подробнее</a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="widget-products__slide swiper-slide">
+													<div class="product-card" data-fls-cardproduct="">
+														<a href="single-product.html" data-fls-slider="" class="product-card__preview swiper">
+															<div class="product-card__wrapper swiper-wrapper">
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/promo/promoslide3.webp">
+																	</picture>
+																</div>
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/products/prodprev1.webp">
+																	</picture>
+																</div>
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/products/catpreview3.webp">
+																	</picture>
+																</div>
+															</div>
+															<div class="swiper-pagination"></div>
+														</a>
+														<div class="product-card__body">
+															<div class="product-card__price">
+																<div class="price" aria-label="Цена" data-fls-price="">
+																	<div class="price__new" aria-label="Новая цена">39 990 ₽</div>
+																	<div class="price__old" aria-label="Старая цена">50 112 ₽</div>
+																</div>
+																<div class="product-card__labels">
+																	<div class="labels" data-fls-labels="">
+																		<div class="labels__item">
+																			<span class="labels__badge labels__badge--sale">-40%</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="product-card__name">
+																<a href="single-product.html">Угловой диван Атланта</a>
+															</div>
+															<div class="product-card__footer">
+																<div class="product-card__actions">
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-compare"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-eye"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-wishlist"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-cart"></use>
+																		</svg>
+																	</button>
+																</div>
+																<div class="product-card__more" data-fls-button="">
+																	<a href="single-product.html" class="btn btn--bg-red">Подробнее</a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="widget-products__slide swiper-slide">
+													<div class="product-card" data-fls-cardproduct="">
+														<a href="single-product.html" data-fls-slider="" class="product-card__preview swiper">
+															<div class="product-card__wrapper swiper-wrapper">
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/products/prodprev1.webp">
+																	</picture>
+																</div>
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/promo/promoslide3.webp">
+																	</picture>
+																</div>
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/products/catpreview3.webp">
+																	</picture>
+																</div>
+															</div>
+															<div class="swiper-pagination"></div>
+														</a>
+														<div class="product-card__body">
+															<div class="product-card__price">
+																<div class="price" aria-label="Цена" data-fls-price="">
+																	<div class="price__new" aria-label="Новая цена">39 990 ₽</div>
+																	<div class="price__old" aria-label="Старая цена">50 112 ₽</div>
+																</div>
+																<div class="product-card__labels">
+																	<div class="labels" data-fls-labels="">
+																		<div class="labels__item">
+																			<span class="labels__badge labels__badge--sale">-40%</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="product-card__name">
+																<a href="single-product.html">Угловой диван Атланта</a>
+															</div>
+															<div class="product-card__footer">
+																<div class="product-card__actions">
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-compare"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-eye"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-wishlist"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-cart"></use>
+																		</svg>
+																	</button>
+																</div>
+																<div class="product-card__more" data-fls-button="">
+																	<a href="single-product.html" class="btn btn--bg-red">Подробнее</a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="widget-products__slide swiper-slide">
+													<div class="product-card" data-fls-cardproduct="">
+														<a href="single-product.html" data-fls-slider="" class="product-card__preview swiper">
+															<div class="product-card__wrapper swiper-wrapper">
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/promo/promoslide3.webp">
+																	</picture>
+																</div>
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/products/prodprev1.webp">
+																	</picture>
+																</div>
+																<div class="product-card__slide swiper-slide">
+																	<picture>
+																		<img alt="" loading="lazy" src="./assets/img/products/catpreview3.webp">
+																	</picture>
+																</div>
+															</div>
+															<div class="swiper-pagination"></div>
+														</a>
+														<div class="product-card__body">
+															<div class="product-card__price">
+																<div class="price" aria-label="Цена" data-fls-price="">
+																	<div class="price__new" aria-label="Новая цена">39 990 ₽</div>
+																	<div class="price__old" aria-label="Старая цена">50 112 ₽</div>
+																</div>
+																<div class="product-card__labels">
+																	<div class="labels" data-fls-labels="">
+																		<div class="labels__item">
+																			<span class="labels__badge labels__badge--sale">-40%</span>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<div class="product-card__name">
+																<a href="single-product.html">Угловой диван Атланта</a>
+															</div>
+															<div class="product-card__footer">
+																<div class="product-card__actions">
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-compare"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-eye"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-wishlist"></use>
+																		</svg>
+																	</button>
+																	<button class="product-card__action" type="button">
+																		<svg class="icon">
+																			<use href="./assets/img/spritemap.svg#sprite-cart"></use>
+																		</svg>
+																	</button>
+																</div>
+																<div class="product-card__more" data-fls-button="">
+																	<a href="single-product.html" class="btn btn--bg-red">Подробнее</a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 								<div class="tabs__body">Содержимое третьего таба</div>
 							</div>
 						</div>

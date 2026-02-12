@@ -5230,37 +5230,32 @@ function initSliders() {
     });
   }
   if (document.querySelector(".widget-news__slider")) {
-    new Swiper(".widget-news__slider", {
-      modules: [Navigation],
-      observer: true,
-      observeParents: true,
-      slidesPerView: 1.15,
-      spaceBetween: 10,
-      autoHeight: false,
-      speed: 800,
-      navigation: {
-        prevEl: ".widget-news__slider-wrapper .swiper-button--prev",
-        nextEl: ".widget-news__slider-wrapper .swiper-button--next"
-      },
-      breakpoints: {
-        480: {
-          slidesPerView: 1.6,
-          spaceBetween: 20
+    const sliders = document.querySelectorAll(".widget-products__slider");
+    sliders.forEach((sliderEl) => {
+      const wrap = sliderEl.closest(".widget-products__slider-wrapper");
+      if (!wrap) return;
+      const prevEl = wrap.querySelector(".swiper-nav--prev");
+      const nextEl = wrap.querySelector(".swiper-nav--next");
+      new Swiper(sliderEl, {
+        modules: [Navigation],
+        observer: true,
+        observeParents: true,
+        slidesPerView: 1.7,
+        spaceBetween: 12,
+        autoHeight: false,
+        speed: 800,
+        navigation: {
+          prevEl,
+          nextEl
         },
-        575: {
-          slidesPerView: 2,
-          spaceBetween: 20
-        },
-        768: {
-          slidesPerView: 2.5,
-          spaceBetween: 20
-        },
-        992: {
-          slidesPerView: 3,
-          spaceBetween: 20
+        breakpoints: {
+          480: { slidesPerView: 2, spaceBetween: 10 },
+          575: { slidesPerView: 2.1, spaceBetween: 10 },
+          768: { slidesPerView: 2.5, spaceBetween: 20 },
+          992: { slidesPerView: 3, spaceBetween: 20 },
+          1280: { slidesPerView: 4, spaceBetween: 20 }
         }
-      },
-      on: {}
+      });
     });
   }
   if (document.querySelector(".widget-gallery__slider")) {
@@ -5381,6 +5376,11 @@ if (catalogButtons.length) {
       const catalog = btn.closest(".header-catalog");
       if (!catalog) return;
       const willOpen = !catalog.classList.contains("_catalog-active");
+      if (willOpen) {
+        document.querySelectorAll(".header-catalog._catalog-active").forEach((c) => {
+          if (c !== catalog) c.classList.remove("_catalog-active");
+        });
+      }
       catalog.classList.toggle("_catalog-active");
       if (willOpen) {
         bodyLock();
@@ -5392,9 +5392,9 @@ if (catalogButtons.length) {
 }
 document.addEventListener("keydown", (e) => {
   if (e.key !== "Escape" && e.key !== "Esc") return;
-  const activeCatalog = document.querySelector(".header-catalog._catalog-active");
-  if (!activeCatalog) return;
-  activeCatalog.classList.remove("_catalog-active");
+  const activeCatalogs = document.querySelectorAll(".header-catalog._catalog-active");
+  if (!activeCatalogs.length) return;
+  activeCatalogs.forEach((c) => c.classList.remove("_catalog-active"));
   if (!isMenuOpen$1()) bodyUnlock();
 });
 const DESKTOP_MIN = 991.98;
@@ -5484,8 +5484,8 @@ function initTabsBlock(block) {
   else mql.addListener(onChange);
 }
 (function initCatalogTopOffset() {
-  const catalogWrapper = document.querySelector(".header-catalog__wrapper");
-  if (!catalogWrapper) return;
+  const catalogWrappers = document.querySelectorAll(".header-catalog__wrapper");
+  if (!catalogWrappers.length) return;
   const headerSelectors = [".header-top", ".header-main", ".header-bottom"];
   const getHeaderBottom = () => {
     let bottom = 0;
@@ -5504,7 +5504,7 @@ function initTabsBlock(block) {
     const top = getHeaderBottom();
     if (top === lastTop) return;
     lastTop = top;
-    catalogWrapper.style.setProperty("--catalog-top", `${top}px`);
+    catalogWrappers.forEach((w) => w.style.setProperty("--catalog-top", `${top}px`));
   };
   const requestApply = () => {
     if (rafId) return;
@@ -8020,12 +8020,6 @@ function initHeaderBottomHoverPill() {
   switches.forEach((btn) => {
     btn.addEventListener("mouseenter", () => activate(btn));
     btn.addEventListener("focusin", () => activate(btn));
-  });
-  leftBlock.addEventListener("mouseleave", () => {
-    resetToDefault();
-  });
-  window.addEventListener("resize", () => {
-    resetToDefault();
   });
 }
 initHeaderBottomHoverPill();
