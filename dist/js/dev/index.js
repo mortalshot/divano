@@ -5404,6 +5404,7 @@ function initTabsBlock(block) {
   const btns = Array.from(block.querySelectorAll("button.header-catalog__title"));
   const bodies = Array.from(block.querySelectorAll(".header-catalog__body"));
   const subBodies = Array.from(block.querySelectorAll(".header-catalog__subbody"));
+  block.querySelector(".header-catalog__subcontent");
   function clearSubAll() {
     subBodies.forEach((sb) => sb.classList.remove("_sub-active"));
   }

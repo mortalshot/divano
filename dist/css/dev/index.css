@@ -952,6 +952,7 @@ h2 {
 }
 .header-catalog__nav {
   background-color: #fff;
+  flex: 0 0 20.625rem;
 }
 .header-catalog__nav {
   display: grid;
@@ -1052,6 +1053,9 @@ h2 {
   background-color: #ff760a;
   color: #fff;
 }
+.header-catalog__list:not(:last-child) {
+  margin-bottom: 0.625rem;
+}
 .header-catalog__link {
   width: 100%;
   display: flex;
@@ -1075,8 +1079,17 @@ h2 {
   height: 1rem;
   fill: #707380;
 }
+.header-catalog__link.header-catalog__link--bold {
+  font-weight: 700;
+}
+.header-catalog__link.header-catalog__link--bold:not(:last-child) {
+  margin-bottom: 1rem;
+}
 .header-catalog__subcontent {
-  flex: 0 0 19.375rem;
+  display: none;
+}
+.header-catalog__subcontent.header-catalog__subcontent {
+  display: block;
 }
 .header-catalog__subbody {
   display: none;
@@ -1084,7 +1097,7 @@ h2 {
   background-color: #fff;
   padding-inline: 1.25rem;
   padding-block: 0.75rem;
-  height: calc(100svh - var(--catalog-top));
+  min-height: 100%;
 }
 .header-catalog__subbody._sub-active {
   display: block;
@@ -3225,6 +3238,9 @@ textarea.input {
   .header-bottom__catalog {
     font-size: 0.875rem;
   }
+  .header-bottom__catalog::before {
+    width: 8.75rem;
+  }
   .bottom-nav {
     margin-inline: -0.3125rem;
   }
@@ -4157,15 +4173,9 @@ textarea.input {
   .header-bottom__catalog {
     padding-inline: 1.25rem;
   }
-  .header-bottom__catalog::before {
-    width: 10rem;
-  }
 }@media (min-width: 61.99875em) and (min-width: 62em) and (max-width: 90em) {
   .header-bottom__catalog {
     padding-inline: clamp( 0.5rem , -1.1607142857125rem  +  2.6785714286vw , 1.25rem );
-  }
-  .header-bottom__catalog::before {
-    width: clamp( 8.75rem , 5.98214285714375rem  +  4.4642857143vw , 10rem );
   }
 }@media (min-width: 61.99875em) and (max-width: 90em) {
   .widget-categories__grid {
@@ -4174,9 +4184,6 @@ textarea.input {
 }@media (min-width: 61.99875em) and (max-width: 62em) {
   .header-bottom__catalog {
     padding-inline: 0.5rem;
-  }
-  .header-bottom__catalog::before {
-    width: 8.75rem;
   }
 }@media (min-width: 61.99875em) {
   .d-md-block {
@@ -4211,12 +4218,20 @@ textarea.input {
     padding-right: 0.5rem;
   }
   .header-catalog__content {
-    flex: 0 0 19.375rem;
     overflow-y: auto;
     overflow-x: hidden;
   }
+  .header-catalog__body {
+    width: 19.375rem;
+  }
+  .header-catalog__body.header-catalog__body--full {
+    width: 100%;
+  }
   .header-catalog__close {
     cursor: default;
+  }
+  .header-catalog__subbody {
+    width: 19.375rem;
   }
   .footer__main-inner {
     justify-content: space-between;
@@ -4296,7 +4311,6 @@ textarea.input {
   .header-bottom__catalog::before {
     content: "";
     display: block;
-    width: 10rem;
     height: 100%;
     border-radius: 1.875rem;
     background-color: #ff760a;
@@ -4369,6 +4383,12 @@ textarea.input {
   }
   .header-catalog__nav {
     flex-basis: clamp( 17.5rem , 10.58035714285625rem  +  11.1607142857vw , 20.625rem );
+  }
+  .header-catalog__subnav._row {
+    margin-inline: clamp( -1.875rem , 2.14285714285625rem  +  -4.4642857143vw , -0.625rem );
+  }
+  .header-catalog__subnav._row > [class^=col-] {
+    padding-inline: clamp( 0.625rem , -2.14285714285625rem  +  4.4642857143vw , 1.875rem );
   }
   .footer__main-inner {
     column-gap: clamp( 1.25rem , -6.36160714285625rem  +  12.2767857143vw , 4.6875rem );
@@ -4456,6 +4476,9 @@ textarea.input {
   }
   .header-bottom__catalog {
     font-size: clamp( 0.875rem , 0.5982142857125rem  +  0.4464285714vw , 1rem );
+  }
+  .header-bottom__catalog::before {
+    width: clamp( 8.75rem , 5.98214285714375rem  +  4.4642857143vw , 10rem );
   }
   .bottom-nav {
     margin-inline: clamp( -0.625rem , 0.3794642857125rem  +  -1.1160714286vw , -0.3125rem );
@@ -4651,6 +4674,12 @@ textarea.input {
   .header-catalog__nav {
     flex-basis: 20.625rem;
   }
+  .header-catalog__subnav._row {
+    margin-inline: -1.875rem;
+  }
+  .header-catalog__subnav._row > [class^=col-] {
+    padding-inline: 1.875rem;
+  }
   .footer__main-inner {
     column-gap: 4.6875rem;
   }
@@ -4737,6 +4766,9 @@ textarea.input {
   }
   .header-bottom__catalog {
     font-size: 1rem;
+  }
+  .header-bottom__catalog::before {
+    width: 10rem;
   }
   .bottom-nav {
     margin-inline: -0.625rem;
