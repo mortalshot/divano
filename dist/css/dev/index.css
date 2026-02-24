@@ -3460,9 +3460,6 @@ textarea.input {
   .header-main__search {
     flex: 1;
   }
-  .header-main__contacts {
-    display: none;
-  }
   .header-main__callback {
     margin-top: 1.25rem;
   }
@@ -4218,8 +4215,28 @@ textarea.input {
     padding-right: 0.5rem;
   }
   .header-catalog__content {
-    overflow-y: auto;
-    overflow-x: hidden;
+    /*       overflow-y: auto;
+    overflow-x: hidden; */
+    position: relative;
+  }
+  ._full-active .header-catalog__content {
+    overflow: initial !important;
+  }
+  ._full-active .header-catalog__content::after {
+    opacity: 1;
+  }
+  .header-catalog__content::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    right: 0.0625rem;
+    top: 0;
+    translate: 100% 0;
+    background-color: #fff;
+    pointer-events: none;
+    opacity: 0;
   }
   .header-catalog__body {
     width: 19.375rem;

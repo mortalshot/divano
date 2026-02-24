@@ -5405,14 +5405,26 @@ function initTabsBlock(block) {
   const bodies = Array.from(block.querySelectorAll(".header-catalog__body"));
   const subBodies = Array.from(block.querySelectorAll(".header-catalog__subbody"));
   block.querySelector(".header-catalog__subcontent");
+  function syncTabsSubState() {
+    const hasActiveSub = subBodies.some((sb) => sb.classList.contains("_sub-active"));
+    block.classList.toggle("_sub-active", hasActiveSub);
+  }
+  function syncTabsFullState() {
+    const hasActiveFullBody = bodies.some(
+      (body) => body.classList.contains("_item-active") && body.classList.contains("header-catalog__body--full")
+    );
+    block.classList.toggle("_full-active", hasActiveFullBody);
+  }
   function clearSubAll() {
     subBodies.forEach((sb) => sb.classList.remove("_sub-active"));
+    syncTabsSubState();
   }
   function openSubByKey(key) {
     if (!key) return;
     clearSubAll();
     const target = subBodies.find((sb) => sb.dataset.subbody === key);
     if (target) target.classList.add("_sub-active");
+    syncTabsSubState();
   }
   block.addEventListener("click", (e) => {
     const btn = e.target.closest("button.header-catalog__title");
@@ -5428,6 +5440,7 @@ function initTabsBlock(block) {
     if (bodies[idx]) {
       bodies[idx].classList.add("_item-active");
     }
+    syncTabsFullState();
   });
   block.addEventListener("pointerover", (e) => {
     const link = e.target.closest(".header-catalog__link");
@@ -5472,17 +5485,27 @@ function initTabsBlock(block) {
       btns[idx].classList.remove("_item-active");
     }
     clearSubAll();
+    syncTabsFullState();
+  });
+  block.addEventListener("click", (e) => {
+    if (e.target !== block) return;
+    const catalog = block.closest(".header-catalog");
+    if (!catalog || !catalog.classList.contains("_catalog-active")) return;
+    catalog.classList.remove("_catalog-active");
+    if (!isMenuOpen$1()) bodyUnlock();
   });
   function clearAll() {
     btns.forEach((b) => b.classList.remove("_item-active"));
     bodies.forEach((b) => b.classList.remove("_item-active"));
     block.querySelectorAll("._item-hover").forEach((el) => el.classList.remove("_item-hover"));
     clearSubAll();
+    syncTabsFullState();
   }
   mql.matches ? "" : clearAll();
   const onChange = (e) => e.matches ? "" : clearAll();
   if (mql.addEventListener) mql.addEventListener("change", onChange);
   else mql.addListener(onChange);
+  syncTabsFullState();
 }
 (function initCatalogTopOffset() {
   const catalogWrappers = document.querySelectorAll(".header-catalog__wrapper");
