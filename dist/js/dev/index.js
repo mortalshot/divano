@@ -5230,12 +5230,12 @@ function initSliders() {
     });
   }
   if (document.querySelector(".widget-news__slider")) {
-    const sliders = document.querySelectorAll(".widget-products__slider");
+    const sliders = document.querySelectorAll(".widget-news__slider");
     sliders.forEach((sliderEl) => {
-      const wrap = sliderEl.closest(".widget-products__slider-wrapper");
+      const wrap = sliderEl.closest(".widget-news__slider-wrapper");
       if (!wrap) return;
-      const prevEl = wrap.querySelector(".swiper-nav--prev");
-      const nextEl = wrap.querySelector(".swiper-nav--next");
+      const prevEl = wrap.querySelector(".swiper-button--prev");
+      const nextEl = wrap.querySelector(".swiper-button--next");
       new Swiper(sliderEl, {
         modules: [Navigation],
         observer: true,
