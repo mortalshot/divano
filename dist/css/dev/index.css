@@ -918,6 +918,9 @@ h2 {
   position: fixed;
   left: 0;
   top: var(--catalog-top);
+  bottom: 0;
+  height: calc(100dvh - var(--catalog-top));
+  overflow-y: auto;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -936,7 +939,8 @@ h2 {
   z-index: 1;
 }
 .header-catalog__tabs {
-  height: calc(100svh - var(--catalog-top));
+  min-height: calc(100dvh - var(--catalog-top));
+  height: calc(100dvh - var(--catalog-top));
   position: relative;
 }
 .header-catalog__tabs::before {
@@ -3352,7 +3356,8 @@ textarea.input {
   }
   .header-catalog__wrapper {
     background-color: #fff;
-    padding-block: 0.75rem;
+    padding-top: calc(0.75rem + env(safe-area-inset-top, 0rem));
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0rem));
   }
   ._catalog-active .header-catalog__wrapper {
     display: block !important;
@@ -3372,6 +3377,9 @@ textarea.input {
     flex: 0 0 1rem;
     background: url(../assets/img/icons/arrow-before.svg) no-repeat center/contain;
   }
+  .header-catalog__nav {
+    padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0rem));
+  }
   .header-catalog__title {
     padding: 0.625rem 0;
   }
@@ -3381,7 +3389,10 @@ textarea.input {
     left: 0;
     top: var(--catalog-top);
     width: 100%;
-    padding: 0.75rem 1rem;
+    height: calc(100dvh - var(--catalog-top));
+    padding: 0.75rem 1rem calc(1.5rem + env(safe-area-inset-bottom, 0rem));
+    overflow-y: auto;
+    overflow-x: hidden;
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -3411,8 +3422,8 @@ textarea.input {
     left: 0;
     top: var(--catalog-top);
     width: 100%;
-    height: calc(100svh - var(--catalog-top));
-    padding: 0.75rem 1rem;
+    height: calc(100dvh - var(--catalog-top));
+    padding: 0.75rem 1rem calc(1.5rem + env(safe-area-inset-bottom, 0rem));
     overflow-x: hidden;
     overflow-y: auto;
     scrollbar-width: thin;
